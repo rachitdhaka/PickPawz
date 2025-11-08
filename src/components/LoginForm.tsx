@@ -3,7 +3,6 @@ import React from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 export function LoginForm() {
    const navigate = useNavigate();

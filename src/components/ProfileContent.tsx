@@ -1,4 +1,3 @@
-import React from "react";
 import banner from "../assets/banner.png";
 import profile from "../assets/dp.jpg";
 import { SelectCom } from "./SelectCom";

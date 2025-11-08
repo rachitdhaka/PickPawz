@@ -1,5 +1,4 @@
 import { ModeToggle } from "@/components/mode-toggle";
-import { SignupFormDemo } from "@/components/SignupFormDemo";
 import { ThemeProvider } from "../../../components/theme-provider";
 import { LoginForm } from "@/components/LoginForm";
 const SignUpPage = () => {
