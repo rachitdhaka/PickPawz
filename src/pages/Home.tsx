@@ -269,7 +269,7 @@ const Home = () => {
         {/* heading and subheading  */}
         <div className="mt-40 flex flex-col items-center justify-center gap-4 text-center">
           <p className="text-5xl font-bold tracking-tight">
-            Find Your Perfect Furry Friend
+            Find Your Perfect <span className="text-chart-1 ">Furry Friend</span>
           </p>
           <p className="tracking-wide text-neutral-500">
             Browse our adoptable pets and give them the loving home they
