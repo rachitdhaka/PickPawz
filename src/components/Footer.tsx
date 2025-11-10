@@ -4,7 +4,7 @@ import { Mail, Phone } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-card  w-full flex text-card-foreground border-t border-border mt-20">
+    <footer className=" bg-background  w-full flex text-card-foreground border-t border-border mt-20">
       <div className=" mx-auto  px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

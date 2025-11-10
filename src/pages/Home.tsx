@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar";
 import PetCard from "@/components/PetCard";
 import { useTheme } from "@/components/theme-provider";
 import { useEffect, useState } from "react";
-
+import Footer from "@/components/Footer";
 const Home = () => {
   const { theme } = useTheme();
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
@@ -298,6 +298,13 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+
+      <div className="relative z-10">
+        <Footer />
+      </div>
+
+
     </div>
   );
 };
