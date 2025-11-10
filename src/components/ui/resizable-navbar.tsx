@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 
 import React, { useRef, useState } from "react";
-import logo from '../../assets/pickpawz.png'
+import logo from '../../assets/logobg.png'
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -28,7 +28,7 @@ interface NavItemsProps {
     link: string;
   }[];
   className?: string;
-  onItemClick?: () => void;
+  onItemClick?: (link: string) => void;
 }
 
 interface MobileNavProps {
@@ -131,8 +131,13 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          onClick={(e) => {
+            e.preventDefault();
+            if (onItemClick) {
+              onItemClick(item.link);
+            }
+          }}
+          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 cursor-pointer"
           key={`link-${idx}`}
           href={item.link}
         >

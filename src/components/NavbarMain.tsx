@@ -20,15 +20,15 @@ export function NavbarMain() {
   const navItems = [
     {
       name: "Home",
-      link: "#features",
+      link: "/home",
     },
     {
       name: "Chat",
-      link: "#pricing",
+      link: "/pricing",
     },
     {
       name: "Docs",
-      link: "#contact",
+      link: "/contact",
     },
   ];
 
@@ -41,11 +41,11 @@ export function NavbarMain() {
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={navItems} />
+          <NavItems items={navItems} onItemClick={(link) => navigate(link)} />
           <div className="flex items-center gap-4 z-10">
             <ModeToggle />
 
-            <NavbarButton variant="secondary" onClick={() => navigate('')}>Login</NavbarButton>
+            <NavbarButton variant="secondary" onClick={() => navigate('/adopt/login')}>Login</NavbarButton>
 
 
           </div>
@@ -69,8 +69,12 @@ export function NavbarMain() {
               <a
                 key={`mobile-link-${idx}`}
                 href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(item.link);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="relative text-neutral-600 dark:text-neutral-300 cursor-pointer"
               >
                 <span className="block">{item.name}</span>
               </a>

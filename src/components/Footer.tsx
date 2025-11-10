@@ -4,8 +4,8 @@ import { Mail, Phone } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-card w-full flex text-card-foreground border-t border-border">
-      <div className=" mx-auto px-6 py-12">
+    <footer className="bg-card  w-full flex text-card-foreground border-t border-border mt-20">
+      <div className=" mx-auto  px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="flex items-center gap-2 text-xl font-semibold">
