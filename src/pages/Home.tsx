@@ -1,8 +1,6 @@
 import { NavbarMain } from "@/components/NavbarMain";
 import SearchBar from "@/components/SearchBar";
 import PetCard from "@/components/PetCard";
-import { useTheme } from "@/components/theme-provider";
-import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 const Home = () => {
 

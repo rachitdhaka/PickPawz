@@ -8,7 +8,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const navlinks = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: "/home" },
     { name: "Adopt", path: "/adopt" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
@@ -26,7 +26,7 @@ const LandingPage = () => {
               <button
                 key={link.name}
                 onClick={() => navigate(link.path)}
-                className="text-card-foreground hover:text-primary relative z-10 mx-4 cursor-pointer text-xl font-medium transition-colors"
+                className="text-card-foreground hover:text-primary relative z-10 mx-4 cursor-pointer text-lg font-medium transition-colors"
               >
                 {link.name}
               </button>
@@ -50,11 +50,11 @@ const LandingPage = () => {
         {/*  Heading and Subheading */}
         <div className="flex flex-col gap-10">
           <p className="text-5xl font-medium tracking-tighter">
-            Find Your Perfect Furry Friend
+            Find Your Perfect <span className="text-6xl text-chart-1">Furry Friend</span>
             <br /> and Give Them a Forever Home
           </p>
           <p className="text-muted-foreground text-md md:text-md font-family-manrope mb-8 max-w-2xl">
-            Connect with loving pets looking for their forever home.
+            Connect with loving pets looking for their <span className="text-chart-5">forever home.</span>
             <br /> Start your journey to unconditional love and companionship
             today.
           </p>
