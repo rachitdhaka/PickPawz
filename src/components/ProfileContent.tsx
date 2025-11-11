@@ -2,13 +2,55 @@ import banner from "../assets/banner.png";
 import profile from "../assets/dp.jpg";
 import Footer from "./Footer";
 import { Button } from "./ui/button";
-
+import React, { useEffect } from "react";
 import { PenLine } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const ProfileContent = () => {
   const navigate = useNavigate();
+
+  const [Profession, setProfession] = React.useState("");
+  const [Description, setDescription] = React.useState("");
+  const [Phone, setPhone] = React.useState("");
+  const [Email, setEmail] = React.useState("");
+  const [HouseFamily, setHouseFamily] = React.useState("");
+  const [ReasonToAdopt, setReasonToAdopt] = React.useState("");
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          "https://pickpawz-server.onrender.com/adopter/getProfile",
+          {
+            headers: {
+              token: token,
+            },
+          },
+        );
+        const profileData = response.data;
+        const adopterData = profileData.adopterData;
+
+        // Access firstname
+       
+
+        setProfession(adopterData.Profession);
+        setDescription(adopterData.Description);
+        setPhone(adopterData.Phone);
+        setEmail(adopterData.Email);
+        setHouseFamily(adopterData.HouseFamily);
+        setReasonToAdopt(adopterData.ReasonToAdopt);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
   return (
-    <div className="  flex min-h-screen flex-col items-center ">
+    <div className="flex min-h-screen flex-col items-center">
       {/* Main Section , Photo , info , contact */}
       <div className="bg-card text-card-foreground mt-40 w-full max-w-5xl rounded-2xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         {/* Banner */}
@@ -38,16 +80,14 @@ const ProfileContent = () => {
               <p className="text-card-foreground text-3xl font-bold">
                 Rachit Dhaka
               </p>
-              <p className="text-md text-muted-foreground">Software Engineer</p>
-              <p className="text-md text-muted-foreground">
-                Love Cats and Dogs
-              </p>
+              <p className="text-md text-muted-foreground">{Profession}</p>
+              <p className="text-md text-muted-foreground">{Description}</p>
             </div>
 
             {/* Contact */}
             <div className="text-md text-card-foreground">
-              <p>Contact: rachit@example.com</p>
-              <p>Phone: +1 234 567 8901</p>
+              <p>Contact: {Email}</p>
+              <p>Phone: {Phone}</p>
               <p>Location: San Francisco, CA</p>
             </div>
           </div>
@@ -66,38 +106,27 @@ const ProfileContent = () => {
         </div>
       </div>
 
-
       {/*  About  , location , family , work*/}
-      <div className=" flex w-5xl gap-2 py-4 ">
+      <div className="flex w-5xl gap-2 py-4">
         {/* left side  */}
 
-        <div className="w-[50%] rounded-xl  bg-background shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-6 dark:bg-card">
+        <div className="bg-background dark:bg-card w-[50%] rounded-xl p-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <div>
             <p className="text-2xl font-bold">House & Family Details</p>
           </div>
 
           <div>
-            <p className="text-md mt-2">
-              I live in a spacious 3-bedroom house with a large backyard,
-              perfect for pets to play and explore. My family consists of
-              myself, my spouse, and our two children who are all animal lovers.
-              We have a routine that ensures pets get plenty of exercise and
-              attention throughout the day.
-            </p>
+            <p className="text-md mt-2">{HouseFamily}</p>
           </div>
         </div>
         {/* right side */}
-        <div className="w-[50%] bg-background shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-6 rounded-xl dark:bg-card">
+        <div className="bg-background dark:bg-card w-[50%] rounded-xl p-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <div>
             <p className="text-2xl font-bold">Reason to Adopt</p>
           </div>
 
           <div>
-            <p className="text-md mt-2">
-              I have always had a deep love for animals and believe that
-              adopting a pet is a wonderful way to provide a loving home to an
-              animal in need. I am committed to giving my adopted pet the best
-            </p>
+            <p className="text-md mt-2">{ReasonToAdopt}</p>
           </div>
         </div>
       </div>
