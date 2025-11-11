@@ -5,24 +5,7 @@ import { useTheme } from "@/components/theme-provider";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 const Home = () => {
-  const { theme } = useTheme();
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
-  useEffect(() => {
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-      setResolvedTheme(systemTheme);
-    } else {
-      setResolvedTheme(theme as "light" | "dark");
-    }
-  }, [theme]);
-
-  const gridColor = resolvedTheme === "dark"
-    ? "oklch(27.4% 0.006 286.033)"
-    : "oklch(86.9% 0.005 56.366)";
 
   const pets = [
     {
@@ -218,8 +201,8 @@ const Home = () => {
         className="absolute inset-0 z-0 h-full"
         style={{
           backgroundImage: `
-        linear-gradient(to right, ${gridColor} 1px, transparent 1px),
-        linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)
+        linear-gradient(to right,var(--color-border) 1px, transparent 1px),
+        linear-gradient(to bottom,var(--color-border) 1px, transparent 1px)
       `,
           backgroundSize: "20px 20px",
           backgroundPosition: "0 0, 0 0",

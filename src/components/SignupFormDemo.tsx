@@ -12,7 +12,7 @@ export function SignupFormDemo() {
     console.log("Form submitted");
   };
   return (
-    <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+    <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] border-4 border-neutral-200 dark:border-neutral-900">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Welcome to Aceternity
       </h2>
@@ -52,7 +52,7 @@ export function SignupFormDemo() {
 
 
         <div>
-          <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">Dont Have an account ? <span className="cursor-pointer text-blue-400" onClick={()=>navigate('/adopt/login')}>Login</span></p>
+          <p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">Dont Have an account ? <span className="cursor-pointer text-blue-400" onClick={()=>navigate('/adopt/login')}>Login</span></p>
         </div>
 
         {/* <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" /> */}

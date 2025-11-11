@@ -3,15 +3,15 @@ import React from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 export function LoginForm() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };
   return (
-    <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+    <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none border-4 border-neutral-200 dark:border-neutral-900 bg-white p-4 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] md:rounded-2xl md:p-8 dark:bg-black">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Welcome to Aceternity - Login
       </h2>
@@ -26,7 +26,6 @@ export function LoginForm() {
             <Label htmlFor="firstname">Name</Label>
             <Input id="firstname" placeholder="Tyler" type="text" />
           </LabelInputContainer>
-
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
@@ -37,15 +36,26 @@ export function LoginForm() {
           <Input id="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
 
-
         <button
-          className="cursor-pointer group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className="group/btn relative block h-10 w-full cursor-pointer rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
           type="submit"
-          onClick={()=>navigate('/profile')}
+          onClick={() => navigate("/profile")}
         >
           Login &rarr;
           <BottomGradient />
         </button>
+
+        <div>
+          <p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+           Don't Have an account ? Create One {" "}
+            <span
+              className="cursor-pointer text-blue-400"
+              onClick={() => navigate("/adopt/signup")}
+            >
+              Signup
+            </span>
+          </p>
+        </div>
 
         {/* <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" /> */}
 
