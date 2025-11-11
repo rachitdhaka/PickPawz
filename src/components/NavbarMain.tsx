@@ -10,11 +10,11 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "../components/ui/resizable-navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ModeToggle } from "./mode-toggle";
-import { useNavigate } from 'react-router-dom';
-export function NavbarMain() {
+import { useNavigate } from "react-router-dom";
 
+export function NavbarMain() {
   const navigate = useNavigate();
 
   const navItems = [
@@ -33,21 +33,77 @@ export function NavbarMain() {
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const checkAuthStatus = () => {
+    const storedName = localStorage.getItem("firstname");
+    const token = localStorage.getItem("token");
+
+    if (storedName) {
+      setName(storedName);
+    }
+
+    setIsLoggedIn(!!token);
+  };
+
+  useEffect(() => {
+    // Check auth status on mount
+    checkAuthStatus();
+
+    // Listen for custom storage events
+    const handleStorageChange = () => {
+      checkAuthStatus();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("authStateChange", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("authStateChange", handleStorageChange);
+    };
+  }, []);
+
+  const logout=()=>{
+    localStorage.removeItem("token");
+    localStorage.removeItem("firstname");
+    setIsLoggedIn(false);
+
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event('authStateChange'));
+
+    navigate("/adopt/login");
+  }
 
   return (
     <div className="relative w-full">
       <Navbar>
-
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} onItemClick={(link) => navigate(link)} />
-          <div className="flex items-center gap-4 z-10">
+          <div className="z-10 flex items-center gap-4">
             <ModeToggle />
 
-            <NavbarButton variant="secondary" onClick={() => navigate('/adopt/login')}>Login</NavbarButton>
-
-
+            {isLoggedIn ? (
+              <div>
+                <NavbarButton variant="secondary" onClick={()=> navigate("/profile")}>{name}</NavbarButton>
+                <NavbarButton
+                  variant="logout"
+                  onClick={() => logout()}
+                >
+                  Logout
+                </NavbarButton>
+              </div>
+            ) : (
+              <NavbarButton
+                variant="secondary"
+                onClick={() => navigate("/adopt/login")}
+              >
+                Login
+              </NavbarButton>
+            )}
           </div>
         </NavBody>
 
@@ -74,34 +130,42 @@ export function NavbarMain() {
                   navigate(item.link);
                   setIsMobileMenuOpen(false);
                 }}
-                className="relative text-neutral-600 dark:text-neutral-300 cursor-pointer"
+                className="relative cursor-pointer text-neutral-600 dark:text-neutral-300"
               >
                 <span className="block">{item.name}</span>
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Book a call
-              </NavbarButton>
+              <ModeToggle />
+              {isLoggedIn ? (
+                <NavbarButton
+                  onClick={() => {
+                    navigate("/adopt/profile");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  variant="primary"
+                  className="w-full"
+                >
+                  {name}
+                </NavbarButton>
+              ) : (
+                <NavbarButton
+                  onClick={() => {
+                    navigate("/adopt/login");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  variant="primary"
+                  className="w-full"
+                >
+                  Login
+                </NavbarButton>
+              )}
             </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
 
-
       {/* Navbar */}
     </div>
   );
 }
-

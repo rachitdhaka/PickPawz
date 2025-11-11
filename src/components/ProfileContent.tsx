@@ -58,7 +58,7 @@ const ProfileContent = () => {
               variant="outline"
               size="icon"
               onClick={() => navigate("/edit")}
-              className="mt-2 h-10"
+              className="mt-2 h-10 cursor-pointer"
             >
               <PenLine />
             </Button>

@@ -272,7 +272,7 @@ export const NavbarButton = ({
   as?: React.ElementType;
   children: React.ReactNode;
   className?: string;
-  variant?: "primary" | "secondary" | "dark" | "gradient";
+  variant?: "primary" | "secondary" | "dark" | "gradient" | "logout"  ;
 } & (
   | React.ComponentPropsWithoutRef<"a">
   | React.ComponentPropsWithoutRef<"button">
@@ -286,6 +286,7 @@ export const NavbarButton = ({
   dark: "bg-black text-white shadow-xl",
     gradient:
   "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-inner",
+  logout: "bg-red-600 text-white text-xs px-2 py-1 shadow-xl",
   };
 
   return (

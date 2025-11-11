@@ -5,10 +5,28 @@ import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 export function SignupFormDemo() {
   const navigate = useNavigate();
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const [firstname, setFirstname] = React.useState("");
+  const [lastname, setLastname] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const data = {firstname, lastname, email, password};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
+      await axios.post('https://pickpawz-server.onrender.com/adopter/signup', data);
+      navigate('/adopt/login');
+    } catch (error) {
+      console.error("There was an error signing up:", error);
+    }
+
+
+
     console.log("Form submitted");
   };
   return (
@@ -24,72 +42,36 @@ export function SignupFormDemo() {
         <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
+            <Input id="firstname" placeholder="Tyler" type="text" value={firstname} onChange={(e)=>setFirstname(e.target.value)} />
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" />
+            <Input id="lastname" placeholder="Durden" type="text" value={lastname} onChange={(e)=> setLastname(e.target.value)} />
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" placeholder="••••••••" type="password" value={password} onChange={(e)=> setPassword(e.target.value)} />
         </LabelInputContainer>
 
 
         <button
           className="cursor-pointer group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
           type="submit"
-          onClick={()=>navigate('/adopt/login')}
+
         >
           Sign up &rarr;
           <BottomGradient />
         </button>
 
-
+      </form>
         <div>
           <p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">Dont Have an account ? <span className="cursor-pointer text-blue-400" onClick={()=>navigate('/adopt/login')}>Login</span></p>
         </div>
-
-        {/* <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" /> */}
-
-        {/* <div className="flex flex-col space-y-4">
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              Google
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              OnlyFans
-            </span>
-            <BottomGradient />
-          </button>
-        </div> */}
-      </form>
     </div>
   );
 }
