@@ -21,5 +21,4 @@ const Docs = () => {
 };
 
 export default Docs;
-("use client");
 

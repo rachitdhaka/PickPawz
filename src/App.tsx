@@ -10,6 +10,7 @@ import EditPage from "./pages/EditPage";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Docs from "./pages/Docs";
+import Aboutus from "./pages/Aboutus";
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/home" element={<Home /> } />
           <Route path="/chat" element={<Chat /> } />
           <Route path="/docs" element={<Docs/> } />
+          <Route path="/about" element={<Aboutus/> } />
         </Routes>
       </ThemeProvider>
     </Router>
