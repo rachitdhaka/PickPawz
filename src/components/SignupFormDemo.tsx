@@ -6,6 +6,9 @@ import { cn } from "../lib/utils";
 
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { toast } from "sonner";
+import { Spinner } from "./ui/spinner";
+
 export function SignupFormDemo() {
   const navigate = useNavigate();
 
@@ -13,10 +16,12 @@ export function SignupFormDemo() {
   const [lastname, setLastname] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const data = {firstname, lastname, email, password};
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
@@ -29,30 +34,32 @@ export function SignupFormDemo() {
         }
       );
       console.log("Signup successful:", response.data);
-      alert("Account created successfully! Please login.");
+      toast.success("Account created successfully! Please login.");
       navigate('/adopt/login');
     } catch (error) {
       console.error("There was an error signing up:", error);
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 403) {
-          alert(error.response?.data?.message || 'Access denied. Please try again.');
+          toast.error(error.response?.data?.message || 'Access denied. Please try again.');
         } else if (error.response?.status === 409) {
-          alert('Email already exists. Please use a different email or login.');
+          toast.error('Email already exists. Please use a different email or login.');
         } else if (error.response) {
-          alert(`Error: ${error.response?.data?.message || 'Signup failed. Please try again.'}`);
+          toast.error(error.response?.data?.message || 'Signup failed. Please try again.');
         } else {
-          alert('Network error. Please check your connection.');
+          toast.error('Network error. Please check your connection.');
         }
       }
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
     <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none bg-white p-4 sm:p-6 md:p-8 md:rounded-2xl dark:bg-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] border-4 border-neutral-200 dark:border-neutral-900">
       <h2 className="text-lg sm:text-xl font-bold text-neutral-800 dark:text-neutral-200">
-        Welcome to Aceternity
+        Welcome to PickPawz
       </h2>
       <p className="mt-2 max-w-sm text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">
-        Signup to aceternity
+        Signup to PickPawz
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
@@ -77,11 +84,20 @@ export function SignupFormDemo() {
 
 
         <button
-          className="cursor-pointer group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className="cursor-pointer group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
-
+          disabled={isLoading}
         >
-          Sign up &rarr;
+          {isLoading ? (
+            <span className="flex items-center justify-center gap-2">
+              <Spinner className="size-4" />
+              Signing up...
+            </span>
+          ) : (
+            <>
+              Sign up &rarr;
+            </>
+          )}
           <BottomGradient />
         </button>
 

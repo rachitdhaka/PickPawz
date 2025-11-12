@@ -5,14 +5,19 @@ import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "sonner";
+import { Spinner } from "./ui/spinner";
+
 export function LoginForm() {
   const navigate = useNavigate();
   const [email , setEmail] = React.useState("");
   const [password , setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const data = {email , password};
   const handleSubmit = async  (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
@@ -33,10 +38,11 @@ export function LoginForm() {
         // Dispatch custom event to notify navbar of auth state change
         window.dispatchEvent(new Event('authStateChange'));
 
+        toast.success("Login successful! Redirecting...");
         navigate("/profile");
       } else {
         console.error("Token or firstname missing in response");
-        alert("Login successful but response incomplete. Please try again.");
+        toast.error("Login successful but response incomplete. Please try again.");
       }
 
     } catch (error) {
@@ -44,25 +50,27 @@ export function LoginForm() {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 403) {
           const errorMsg = error.response?.data?.message || 'Access denied. Please check your credentials.';
-          alert(errorMsg);
+          toast.error(errorMsg);
         } else if (error.response?.status === 401) {
-          alert('Invalid email or password.');
+          toast.error('Invalid email or password.');
         } else if (error.response) {
-          alert(`Error: ${error.response?.data?.message || 'Login failed. Please try again.'}`);
+          toast.error(error.response?.data?.message || 'Login failed. Please try again.');
         } else {
-          alert('Network error. Please check your connection.');
+          toast.error('Network error. Please check your connection.');
         }
       }
+    } finally {
+      setIsLoading(false);
     }
 
   };
   return (
     <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none border-4 border-neutral-200 dark:border-neutral-900 bg-white p-4 sm:p-6 md:p-8 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] md:rounded-2xl dark:bg-black">
       <h2 className="text-lg sm:text-xl font-bold text-neutral-800 dark:text-neutral-200">
-        Welcome to Aceternity - Login
+        Welcome to PickPawz - Login
       </h2>
       <p className="mt-2 max-w-sm text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">
-        Login to aceternity if you can because we don&apos;t have a login flow
+        Login to PickPawz if you can because we don&apos;t have a login flow
         yet
       </p>
 
@@ -83,10 +91,20 @@ export function LoginForm() {
         </LabelInputContainer>
 
         <button
-          className="group/btn relative block h-10 w-full cursor-pointer rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className="group/btn relative block h-10 w-full cursor-pointer rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
+          disabled={isLoading}
         >
-          Login &rarr;
+          {isLoading ? (
+            <span className="flex items-center justify-center gap-2">
+              <Spinner className="size-4" />
+              Logging in...
+            </span>
+          ) : (
+            <>
+              Login &rarr;
+            </>
+          )}
           <BottomGradient />
         </button>
 

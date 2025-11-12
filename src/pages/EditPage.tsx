@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/field"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 // Define the form schema with zod validation
 const formSchema = z.object({
@@ -110,7 +111,7 @@ const EditPage = () => {
     const token = localStorage.getItem("token")
 
     if (!token) {
-      alert("You are not logged in. Please log in first.")
+      toast.error("You are not logged in. Please log in first.")
       navigate("/login")
       return
     }
@@ -122,11 +123,11 @@ const EditPage = () => {
           'token': token,
         },
       })
-      alert("Profile updated successfully!")
+      toast.success("Profile updated successfully!")
       navigate("/profile")
     }catch(error){
       console.error("Error updating profile:", error)
-      alert("There was an error updating your profile. Please try again.")
+      toast.error("There was an error updating your profile. Please try again.")
       return
     }
   }

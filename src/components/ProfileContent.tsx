@@ -87,11 +87,11 @@ const ProfileContent = () => {
             />
           </div>
           {/* content wala div */}
-          <div className="flex flex-col md:flex-row w-full md:w-fit items-start justify-between gap-4 md:gap-8 mt-4 md:mt-0">
+          <div className="flex flex-col md:flex-row w-full md:w-fit items-start p-4 justify-between gap-4 md:gap-8 mt-4 md:mt-0">
             {/* profile image - negative margin to overlap banner */}
 
             {/* Info */}
-            <div className="w-full md:w-auto">
+            <div className="w-full md:w-auto ">
               <p className="text-card-foreground text-xl sm:text-2xl md:text-3xl font-bold">
 
                 {name}

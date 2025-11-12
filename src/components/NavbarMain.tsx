@@ -24,11 +24,11 @@ export function NavbarMain() {
     },
     {
       name: "Chat",
-      link: "/pricing",
+      link: "/chat",
     },
     {
       name: "Docs",
-      link: "/contact",
+      link: "/docs",
     },
   ];
 
