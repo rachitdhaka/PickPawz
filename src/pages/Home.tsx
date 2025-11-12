@@ -248,11 +248,11 @@ const Home = () => {
         <NavbarMain />
 
         {/* heading and subheading  */}
-        <div className="mt-40 flex flex-col items-center justify-center gap-4 text-center">
-          <p className="text-5xl font-bold tracking-tight">
+        <div className="mt-20 md:mt-40 flex flex-col items-center justify-center gap-3 md:gap-4 text-center px-4">
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
             Find Your Perfect <span className="text-chart-1 ">Furry Friend</span>
           </p>
-          <p className="tracking-wide text-neutral-500">
+          <p className="tracking-wide text-neutral-500 text-sm sm:text-base">
             Browse our adoptable pets and give them the loving home they
             deserve.
             <br />

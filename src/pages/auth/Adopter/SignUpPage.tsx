@@ -21,10 +21,10 @@ const SignUpPage = () => {
           }}
         />
         <div>
-          <div className="fixed top-0 right-0 z-20 p-4">
+          <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-20 p-2 sm:p-4">
             <ModeToggle />
           </div>
-          <div className="relative z-10 flex h-screen items-center justify-center ">
+          <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8">
             <SignupFormDemo />
           </div>
         </div>

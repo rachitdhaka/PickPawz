@@ -23,7 +23,7 @@ const PetCard: React.FC<PetCardProps> = ({
     <div className="transform overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer border border-border">
       <div className="relative">
         {/* image of the dog*/}
-        <div className="h-64 overflow-hidden">
+        <div className="h-48 sm:h-56 md:h-64 overflow-hidden">
           <img
             src={image}
             alt={name}
@@ -39,20 +39,20 @@ const PetCard: React.FC<PetCardProps> = ({
         </div>
       </div>
 
-      <div className="p-4">
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="text-lg font-semibold text-card-foreground">{name}</h3>
-            <div className="mt-1 flex items-center text-sm text-muted-foreground">
-              <MapPin size={14} className="mr-1" />
-              <span>{location}</span>
+      <div className="p-3 sm:p-4">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base sm:text-lg font-semibold text-card-foreground truncate">{name}</h3>
+            <div className="mt-1 flex items-center text-xs sm:text-sm text-muted-foreground">
+              <MapPin size={14} className="mr-1 shrink-0" />
+              <span className="truncate">{location}</span>
             </div>
           </div>
-          <div className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+          <div className="rounded-full bg-secondary px-2 sm:px-3 py-1 text-xs font-medium text-secondary-foreground shrink-0">
             {age}
           </div>
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">{breed}</p>
+        <p className="mt-2 text-xs sm:text-sm text-muted-foreground truncate">{breed}</p>
       </div>
     </div>
   );

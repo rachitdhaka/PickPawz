@@ -140,7 +140,7 @@ export function NavbarMain() {
               {isLoggedIn ? (
                 <NavbarButton
                   onClick={() => {
-                    navigate("/adopt/profile");
+                    navigate("/profile");
                     setIsMobileMenuOpen(false);
                   }}
                   variant="primary"

@@ -132,19 +132,19 @@ const EditPage = () => {
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-4xl px-4 py-8">
-      <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold">Edit Profile</h1>
-        <p className="text-muted-foreground">
+    <div className="mx-auto min-h-screen w-full max-w-4xl px-4 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="mb-2 text-2xl sm:text-3xl font-bold">Edit Profile</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
           Update your information and preferences for pet adoption
         </p>
       </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
         {/* Personal Information Section */}
-        <div className="rounded-lg border p-6">
-          <h2 className="mb-6 text-xl font-semibold">Personal Information</h2>
-          <div className="space-y-6">
+        <div className="rounded-lg border p-4 sm:p-6">
+          <h2 className="mb-4 sm:mb-6 text-lg sm:text-xl font-semibold">Personal Information</h2>
+          <div className="space-y-4 sm:space-y-6">
             {/* Profession */}
             <Controller
               name="profession"
@@ -198,9 +198,9 @@ const EditPage = () => {
         </div>
 
         {/* Contact Information Section */}
-        <div className="rounded-lg border p-6">
-          <h2 className="mb-6 text-xl font-semibold">Contact Information</h2>
-          <div className="space-y-6">
+        <div className="rounded-lg border p-4 sm:p-6">
+          <h2 className="mb-4 sm:mb-6 text-lg sm:text-xl font-semibold">Contact Information</h2>
+          <div className="space-y-4 sm:space-y-6">
             {/* Email */}
             <Controller
               name="email"
@@ -312,9 +312,9 @@ const EditPage = () => {
         </div>
 
         {/* Adoption Information Section */}
-        <div className="rounded-lg border p-6">
-          <h2 className="mb-6 text-xl font-semibold">Adoption Details</h2>
-          <div className="space-y-6">
+        <div className="rounded-lg border p-4 sm:p-6">
+          <h2 className="mb-4 sm:mb-6 text-lg sm:text-xl font-semibold">Adoption Details</h2>
+          <div className="space-y-4 sm:space-y-6">
             {/* Reason for Adoption */}
             <Controller
               name="reasonForAdoption"

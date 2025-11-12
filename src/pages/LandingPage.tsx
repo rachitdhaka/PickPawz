@@ -16,12 +16,12 @@ const LandingPage = () => {
   return (
     <div className="">
       {/* Navbar */}
-      <div className="mb-20 border-b border-neutral-900">
-        <div className="mx-auto flex max-w-7xl items-center justify-between py-4">
-          <div className="px-4">
+      <div className="mb-10 md:mb-20 border-b border-neutral-900">
+        <div className="mx-auto flex max-w-7xl items-center justify-between py-4 px-4">
+          <div className="">
             <NavbarLogo />
           </div>
-          <div className="">
+          <div className="hidden md:flex">
             {navlinks.map((link) => (
               <button
                 key={link.name}
@@ -33,14 +33,14 @@ const LandingPage = () => {
             ))}
           </div>
 
-          <div className="px-4">
+          <div className="">
             <ModeToggle />
           </div>
         </div>
       </div>
 
       {/* Hero Section */}
-      <div className="relative mx-auto h-screen max-w-7xl px-8">
+      <div className="relative mx-auto min-h-screen max-w-7xl px-4 md:px-8">
         {/* decortive lines */}
         {/* <div className="absolute inset-0 mx-auto hidden w-full max-w-7xl md:block">
           <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-900/40"></div>
@@ -48,12 +48,12 @@ const LandingPage = () => {
         </div> */}
 
         {/*  Heading and Subheading */}
-        <div className="flex flex-col gap-10">
-          <p className="text-5xl font-medium tracking-tighter">
-            Find Your Perfect <span className="text-6xl text-chart-1">Furry Friend</span>
+        <div className="flex flex-col gap-6 md:gap-10">
+          <p className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tighter">
+            Find Your Perfect <span className="text-4xl sm:text-5xl md:text-6xl text-chart-1">Furry Friend</span>
             <br /> and Give Them a Forever Home
           </p>
-          <p className="text-muted-foreground text-md md:text-md font-family-manrope mb-8 max-w-2xl">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-md font-family-manrope mb-4 md:mb-8 max-w-2xl">
             Connect with loving pets looking for their <span className="text-chart-5">forever home.</span>
             <br /> Start your journey to unconditional love and companionship
             today.
@@ -61,16 +61,16 @@ const LandingPage = () => {
         </div>
 
         {/* buttons */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
           <button
             onClick={() => navigate("/home")}
-            className="bg-primary text-primary-foreground cursor-pointer rounded-lg px-4 py-2 font-semibold transition-opacity hover:opacity-90"
+            className="bg-primary text-primary-foreground cursor-pointer rounded-lg px-4 py-2 font-semibold transition-opacity hover:opacity-90 w-full sm:w-auto"
           >
             Browse Pets
           </button>
           <button
             onClick={() => navigate("/about")}
-            className="border-primary text-primary hover:bg-primary/10 rounded-lg border px-4 py-2 font-semibold transition-colors"
+            className="border-primary text-primary hover:bg-primary/10 rounded-lg border px-4 py-2 font-semibold transition-colors w-full sm:w-auto"
           >
             Learn More
           </button>
@@ -78,7 +78,7 @@ const LandingPage = () => {
 
         {/* landing page images */}
 
-        <div className="relative">
+        <div className="relative hidden md:block">
           <div className="bg-background absolute inset-x-0 h-180 w-full mask-b-from-10%"></div>
           <div className="relative mt-20 min-h-140 w-full translate-x-10 perspective-distant">
             <motion.div
@@ -116,12 +116,12 @@ const LandingPage = () => {
       </div>
 
       {/* kuch tho hai section */}
-      <div className="mx-auto mt-40 max-w-7xl px-8 py-20 ">
-        <div className="flex items-end justify-center">
-          <h2 className="min-w-xl text-6xl font-bold">
-            Every Pet Deserves a Loving Home <br /> and Love
+      <div className="mx-auto mt-20 md:mt-40 max-w-7xl px-4 md:px-8 py-10 md:py-20 ">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-center gap-6 md:gap-8">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center md:text-left">
+            Every Pet Deserves a Loving Home <br className="hidden md:block" /> and Love
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg text-center md:text-left">
             Thousands of cats and dogs are waiting for their second chance at
             happiness. By adopting, you're not just gaining a companion—you're
             saving a life and making room for another animal in need
