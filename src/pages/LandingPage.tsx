@@ -9,8 +9,8 @@ const LandingPage = () => {
 
   const navlinks = [
     { name: "Home", path: "/home" },
-    { name: "Login", path: "/login" },
-    { name: "About Us", path: "/adopt/about" },
+    { name: "About", path: "/about" },
+    { name: "Login", path: "/adopt/login" },
 
   ];
   return (
