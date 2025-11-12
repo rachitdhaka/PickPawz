@@ -15,9 +15,16 @@ export function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://pickpawz-server.onrender.com/adopter/login', data);
+      const response = await axios.post(
+        'https://pickpawz-server.onrender.com/adopter/login',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       console.log("Login successful:", response.data);
-      navigate("/profile");
 
       if(response.data.token && response.data.firstname){
         localStorage.setItem('token', response.data.token);
@@ -25,11 +32,27 @@ export function LoginForm() {
 
         // Dispatch custom event to notify navbar of auth state change
         window.dispatchEvent(new Event('authStateChange'));
+
+        navigate("/profile");
+      } else {
+        console.error("Token or firstname missing in response");
+        alert("Login successful but response incomplete. Please try again.");
       }
-      navigate("/profile");
 
     } catch (error) {
       console.error("There was an error logging in:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 403) {
+          const errorMsg = error.response?.data?.message || 'Access denied. Please check your credentials.';
+          alert(errorMsg);
+        } else if (error.response?.status === 401) {
+          alert('Invalid email or password.');
+        } else if (error.response) {
+          alert(`Error: ${error.response?.data?.message || 'Login failed. Please try again.'}`);
+        } else {
+          alert('Network error. Please check your connection.');
+        }
+      }
     }
 
   };

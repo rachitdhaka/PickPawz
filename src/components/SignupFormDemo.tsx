@@ -19,15 +19,32 @@ export function SignupFormDemo() {
     e.preventDefault();
 
     try {
-      await axios.post('https://pickpawz-server.onrender.com/adopter/signup', data);
+      const response = await axios.post(
+        'https://pickpawz-server.onrender.com/adopter/signup',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log("Signup successful:", response.data);
+      alert("Account created successfully! Please login.");
       navigate('/adopt/login');
     } catch (error) {
       console.error("There was an error signing up:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 403) {
+          alert(error.response?.data?.message || 'Access denied. Please try again.');
+        } else if (error.response?.status === 409) {
+          alert('Email already exists. Please use a different email or login.');
+        } else if (error.response) {
+          alert(`Error: ${error.response?.data?.message || 'Signup failed. Please try again.'}`);
+        } else {
+          alert('Network error. Please check your connection.');
+        }
+      }
     }
-
-
-
-    console.log("Form submitted");
   };
   return (
     <div className="shadow-input mx-auto h-fit w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] border-4 border-neutral-200 dark:border-neutral-900">

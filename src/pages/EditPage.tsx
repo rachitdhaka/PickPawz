@@ -19,6 +19,8 @@ const EditPage = () => {
   const [Email, setEmail] = React.useState("");
   const [HouseFamily, setHouseFamily] = React.useState("");
   const [ReasonToAdopt, setReasonToAdopt] = React.useState("");
+  const [city , setCity] = React.useState("");
+  const [state , setState] = React.useState("");
 
   const data = {
     Profession,
@@ -27,6 +29,8 @@ const EditPage = () => {
     Email,
     HouseFamily,
     ReasonToAdopt,
+    city,
+    state
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {

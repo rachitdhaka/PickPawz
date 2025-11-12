@@ -8,16 +8,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProfileContent = () => {
-  const navigate = useNavigate();
 
+  const ProfileName = localStorage.getItem("firstname") || "";
   const [Profession, setProfession] = React.useState("");
   const [Description, setDescription] = React.useState("");
   const [Phone, setPhone] = React.useState("");
   const [Email, setEmail] = React.useState("");
   const [HouseFamily, setHouseFamily] = React.useState("");
   const [ReasonToAdopt, setReasonToAdopt] = React.useState("");
-
+  const [name , setName] = React.useState("");
+  
+  const navigate = useNavigate();
   useEffect(() => {
+
+
+
+
+
     const fetchProfileData = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -29,18 +36,29 @@ const ProfileContent = () => {
             },
           },
         );
+        console.log("Full response:", response.data);
         const profileData = response.data;
         const adopterData = profileData.adopterData;
 
-        // Access firstname
-       
 
-        setProfession(adopterData.Profession);
-        setDescription(adopterData.Description);
-        setPhone(adopterData.Phone);
-        setEmail(adopterData.Email);
-        setHouseFamily(adopterData.HouseFamily);
-        setReasonToAdopt(adopterData.ReasonToAdopt);
+
+
+
+        // Check if adopterData exists before accessing properties
+        if (adopterData) {
+          setName((adopterData.firstname ) + " " + ( adopterData.lastname || ""));
+
+          setProfession(adopterData.Profession || "");
+          setDescription(adopterData.Description || "");
+          setPhone(adopterData.Phone || "");
+          setEmail(adopterData.Email || "");
+          setHouseFamily(adopterData.HouseFamily || "");
+          setReasonToAdopt(adopterData.ReasonToAdopt || "");
+
+        } else {
+          console.error("adopterData is null or undefined");
+          console.log("Check if token exists:", localStorage.getItem("token"));
+        }
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
@@ -78,7 +96,8 @@ const ProfileContent = () => {
             {/* Info */}
             <div>
               <p className="text-card-foreground text-3xl font-bold">
-                Rachit Dhaka
+
+                {name}
               </p>
               <p className="text-md text-muted-foreground">{Profession}</p>
               <p className="text-md text-muted-foreground">{Description}</p>
