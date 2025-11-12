@@ -14,7 +14,7 @@ const Docs = () => {
         </p>
 
       </div>
-        
+
       <BackgroundBeams />
     </div>
   );
