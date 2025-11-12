@@ -1,6 +1,4 @@
 
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import { BackgroundBeams } from "../components/ui/background-beams";
 const Docs = () => {
   return (
