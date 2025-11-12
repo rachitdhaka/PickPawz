@@ -9,7 +9,7 @@ import axios from "axios";
 
 const ProfileContent = () => {
 
-  const ProfileName = localStorage.getItem("firstname") || "";
+
   const [Profession, setProfession] = React.useState("");
   const [Description, setDescription] = React.useState("");
   const [Phone, setPhone] = React.useState("");
@@ -17,13 +17,10 @@ const ProfileContent = () => {
   const [HouseFamily, setHouseFamily] = React.useState("");
   const [ReasonToAdopt, setReasonToAdopt] = React.useState("");
   const [name , setName] = React.useState("");
-  
+  const [location, setLocation] = React.useState("");
+
   const navigate = useNavigate();
   useEffect(() => {
-
-
-
-
 
     const fetchProfileData = async () => {
       try {
@@ -47,13 +44,13 @@ const ProfileContent = () => {
         // Check if adopterData exists before accessing properties
         if (adopterData) {
           setName((adopterData.firstname ) + " " + ( adopterData.lastname || ""));
-
-          setProfession(adopterData.Profession || "");
-          setDescription(adopterData.Description || "");
-          setPhone(adopterData.Phone || "");
-          setEmail(adopterData.Email || "");
-          setHouseFamily(adopterData.HouseFamily || "");
-          setReasonToAdopt(adopterData.ReasonToAdopt || "");
+          setLocation((adopterData.city)+" " + (adopterData.state || "") || "");
+          setProfession(adopterData.profession || "");
+          setDescription(adopterData.aboutMe || "");
+          setPhone(adopterData.phone || "");
+          setEmail(adopterData.email || "");
+          setHouseFamily(adopterData.houseAndFamily || "");
+          setReasonToAdopt(adopterData.reasonForAdoption || "");
 
         } else {
           console.error("adopterData is null or undefined");
@@ -107,7 +104,7 @@ const ProfileContent = () => {
             <div className="text-md text-card-foreground">
               <p>Contact: {Email}</p>
               <p>Phone: {Phone}</p>
-              <p>Location: San Francisco, CA</p>
+              <p>Location: {location}</p>
             </div>
           </div>
 
